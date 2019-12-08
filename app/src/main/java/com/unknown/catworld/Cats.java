@@ -17,6 +17,46 @@ public class Cats {
         this.dig = dig;
     }
 
+    public String getCatName() {
+        return catName;
+    }
+
+    public void setCatName(String catName) {
+        this.catName = catName;
+    }
+
+    public String getIsAt() {
+        return isAt;
+    }
+
+    public void setIsAt(String isAt) {
+        this.isAt = isAt;
+    }
+
+    public Boolean getUnlocked() {
+        return isUnlocked;
+    }
+
+    public void setUnlocked(Boolean unlocked) {
+        isUnlocked = unlocked;
+    }
+
+    public int[] getIdle() {
+        return idle;
+    }
+
+    public void setIdle(int[] idle) {
+        this.idle = idle;
+    }
+
+    public int[] getDig() {
+        return dig;
+    }
+
+    public void setDig(int[] dig) {
+        this.dig = dig;
+    }
+
     //
 //    static String Cat1At = "Room", Cat2At = "Room";
 //
