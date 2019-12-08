@@ -11,6 +11,10 @@
         android:src="@drawable/forest"
         android:scaleType="centerCrop"/>
 
-
+    <com.unknown.catworld.DrawCatView
+        android:id="@+id/draw_cat_view_forest"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="32dp"/>
 
 </RelativeLayout>

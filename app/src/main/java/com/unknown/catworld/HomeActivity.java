@@ -1,6 +1,7 @@
 package com.unknown.catworld;
 
 import android.os.Bundle;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,6 +12,8 @@ import androidx.viewpager.widget.ViewPager;
 
 public class HomeActivity extends AppCompatActivity {
 
+    public static String pageAt="room";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -20,6 +23,27 @@ public class HomeActivity extends AppCompatActivity {
 
         HomeAdapter homeAdapter = new HomeAdapter(getSupportFragmentManager());
         viewPager.setAdapter(homeAdapter);
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                if (position == 0) {
+                    pageAt = "room";
+                } else if (position == 1) {
+                    pageAt = "forest";
+                }
+                Log.e("HomeA", pageAt);
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
 
     }
 

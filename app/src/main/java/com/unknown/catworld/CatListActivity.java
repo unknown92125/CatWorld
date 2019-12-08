@@ -4,13 +4,12 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.BaseAdapter;
+import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
@@ -33,60 +32,84 @@ public class CatListActivity extends AppCompatActivity {
             }
         }
 
-        RecyclerView recyclerView = findViewById(R.id.rv_cat_list);
-        CatListRecyclerAdapter catListRecyclerAdapter = new CatListRecyclerAdapter(arrListAllCats);
-        recyclerView.setAdapter(catListRecyclerAdapter);
+        GridView gridView = findViewById(R.id.gv_cat_list);
+        CatListGridAdapter catListGridAdapter = new CatListGridAdapter(arrListAllCats);
+        gridView.setAdapter(catListGridAdapter);
 
     }
 
-    public class CatListRecyclerAdapter extends RecyclerView.Adapter {
+    public class CatListGridAdapter extends BaseAdapter {
 
         ArrayList<Cats> arrListAllCats;
 
-        public CatListRecyclerAdapter(ArrayList<Cats> arrListAllCats) {
+        public CatListGridAdapter(ArrayList<Cats> arrListAllCats) {
             this.arrListAllCats = arrListAllCats;
         }
 
-        @NonNull
         @Override
-        public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-            LayoutInflater inflater = getLayoutInflater();
-            View itemView = inflater.inflate(R.layout.cat_list_recycler_view, parent, false);
-
-            VHolder vHolder = new VHolder(itemView);
-
-            return vHolder;
-        }
-
-        @Override
-        public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-
-            VHolder vHolder = (VHolder) holder;
-            Cats cats = arrListAllCats.get(position);
-
-            vHolder.tvName.setText(cats.getCatName());
-            vHolder.tvAt.setText(cats.getIsAt());
-            vHolder.ivCat.setImageResource(cats.getIdle()[0]);
-
-        }
-
-        @Override
-        public int getItemCount() {
+        public int getCount() {
             return arrListAllCats.size();
         }
 
-        public class VHolder extends RecyclerView.ViewHolder {
+        @Override
+        public Object getItem(int position) {
+            return arrListAllCats.get(position);
+        }
 
-            private TextView tvName, tvAt;
-            private ImageView ivCat;
+        @Override
+        public long getItemId(int position) {
+            return position;
+        }
 
-            public VHolder(@NonNull View itemView) {
-                super(itemView);
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
 
-                tvName = itemView.findViewById(R.id.tv_name);
-                tvAt = itemView.findViewById(R.id.tv_at);
-                ivCat = itemView.findViewById(R.id.iv_cat);
+            if (convertView == null) {
+                LayoutInflater inflater = getLayoutInflater();
+                convertView = inflater.inflate(R.layout.cat_list_grid_view, null);
+                convertView.setLayoutParams(new GridView.LayoutParams(300, 300));
+            }
 
+            Cats cats = arrListAllCats.get(position);
+
+            TextView tvName = convertView.findViewById(R.id.tv_name);
+            TextView tvAt = convertView.findViewById(R.id.tv_at);
+            ImageView ivCat = convertView.findViewById(R.id.iv_cat);
+
+            tvName.setText(cats.getCatName());
+            tvAt.setText(cats.getIsAt());
+            ivCat.setImageResource(cats.getIdle()[0]);
+
+            convertView.setTag(position);
+
+            convertView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    int pos = (int) v.getTag();
+                    if (arrListAllCats.get(pos).isAt.equals("room")) {
+                        arrListAllCats.get(pos).isAt = "forest";
+                    }else {
+                        arrListAllCats.get(pos).isAt="room";
+                    }
+                }
+            });
+
+            return convertView;
+        }
+
+
+//        public class VHolder extends RecyclerView.ViewHolder {
+//
+//            private TextView tvName, tvAt;
+//            private ImageView ivCat;
+//
+//            public VHolder(@NonNull View itemView) {
+//                super(itemView);
+//
+//                tvName = itemView.findViewById(R.id.tv_name);
+//                tvAt = itemView.findViewById(R.id.tv_at);
+//                ivCat = itemView.findViewById(R.id.iv_cat);
+//
 //                itemView.setOnClickListener(new View.OnClickListener() {
 //                    @Override
 //                    public void onClick(View v) {
@@ -96,8 +119,8 @@ public class CatListActivity extends AppCompatActivity {
 //                        startActivity(new Intent(getActivity(), ChatActivity.class));
 //                    }
 //                });
-            }
-        }
+//            }
+//        }
     }
 
 }

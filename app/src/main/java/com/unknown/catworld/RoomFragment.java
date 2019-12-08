@@ -11,7 +11,7 @@ import androidx.fragment.app.Fragment;
 
 public class RoomFragment extends Fragment implements View.OnClickListener {
 
-    RoomView roomView;
+    DrawCatView drawCatView;
     HomeActivity homeActivity;
 
 
@@ -25,7 +25,7 @@ public class RoomFragment extends Fragment implements View.OnClickListener {
         View view = inflater.inflate(R.layout.fragment_room, container, false);
 
         homeActivity = (HomeActivity) getActivity();
-        roomView = view.findViewById(R.id.room_view);
+        drawCatView = view.findViewById(R.id.draw_cat_view_room);
         view.findViewById(R.id.bt_cat_list).setOnClickListener(this);
 
         return view;
@@ -35,13 +35,13 @@ public class RoomFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onResume() {
         super.onResume();
-        roomView.resume();
+        drawCatView.resume();
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        roomView.pause();
+        drawCatView.pause();
     }
 
     @Override

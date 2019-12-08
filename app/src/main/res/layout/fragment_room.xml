@@ -93,8 +93,8 @@
         android:paddingBottom="32dp"
         android:src="@drawable/carpet_1" />
 
-    <com.unknown.catworld.RoomView
-        android:id="@+id/room_view"
+    <com.unknown.catworld.DrawCatView
+        android:id="@+id/draw_cat_view_room"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignTop="@id/iv_floor"
